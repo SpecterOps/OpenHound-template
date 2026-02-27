@@ -1,0 +1,23 @@
+[project]
+name = "openfetch-{{your_service}}"
+version = "0.0.1"
+description = "OpenGraph collector for {{your_service}} using OpenFetch"
+readme = "README.md"
+requires-python = ">=3.13"
+
+authors = [
+  {name = "{{your_name}}", email = "{{your_email}}"}
+]
+
+[dependency-groups]
+dev = [
+    "openfetch>=0.1.0",
+    "black>=25.9.0",
+    "flake8>=7.3.0",
+    "griffe>=1.15.0",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.1",
+]
+
+[project.entry-points."openfetch.sources"]
+{{your_service}} = "openfetch_{{your_service}}.main:app"
