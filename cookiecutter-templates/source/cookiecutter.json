@@ -1,0 +1,22 @@
+{
+  "project_name": "My SaaSInc Collector",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "target_service": "SaaSInc",
+  "target_service_slug": "{{ cookiecutter.target_service.lower().replace(' ', '_') }}",
+  "author": "",
+  "author_email": "",
+  "api_version": ">=8.0",
+  "channel": "dev",
+  "__prompts__": {
+    "project_name": "Human readable collector name (e.g. 'JAMF Pro Collector')",
+    "target_service": "Target service name (e.g. JAMF, Okta, Entra)",
+    "author": "Author full name",
+    "api_version": "BloodHound API version constraint",
+    "channel": {
+      "__prompt__": "Release channel",
+      "dev": "dev",
+      "beta": "beta",
+      "stable": "stable"
+    }
+  }
+}
