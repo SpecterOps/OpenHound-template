@@ -3,7 +3,7 @@ name = "{{ cookiecutter.project_slug}}"
 version = "0.0.1"
 description = "OpenGraph collector for {{ cookiecutter.target_service_slug}} using OpenHound"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = "<=3.14,>=3.13"
 authors = [
   {name = "{{ cookiecutter.author}}", email = "{{ cookiecutter.author_email }}"}
 ]

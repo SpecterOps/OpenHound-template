@@ -1,5 +1,4 @@
-from openfetch.main import app
-import openfetch_{{ cookiecutter.target_service_slug }}.main
+from openhound.main import app
 
 if __name__ == "__main__":
     app()
