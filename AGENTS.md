@@ -317,10 +317,11 @@ def preproc(ctx: PreProcContext) -> dict[str, str]:
     }
 
 
-@app.convert()
+@app.convert(lookup=EXLookup)
 def convert(ctx: ConvertContext) -> DltSource:
     from .source import source as myservice_source
-    # Second element is a dict passed to the LookupManager; leave empty if no preproc.
+    # Second element is a dict with additional static data that can be used by an Asset via self._extras["key"]
+    # the (optional) lookup is injected as self._lookup on every Asset, so it can be used in as_node and edges properties to resolve cross-table relationships.
     return myservice_source(), {}
 ```
 
