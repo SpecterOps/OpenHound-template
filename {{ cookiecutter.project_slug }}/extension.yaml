@@ -1,0 +1,26 @@
+name: "{{ cookiecutter.target_service_slug }}"
+version: 0.0.1
+description: "OpenHound collector for {{ cookiecutter.target_service_slug }}"
+authors:
+  - name: "{{ cookiecutter.author }}"
+    email: "{{ cookiecutter.author_email }}"
+
+type: local
+license: MIT
+homepage: TBD
+references:
+  - name: OpenHound
+    url: TBD
+
+credentials:
+  - name: example
+    description: Example credential
+    required: false
+
+parameters:
+  - name: size
+    description: An example parameter specifying batch size for fetching data
+    required: false
+    default: 10000
+
+tags: ["{{ cookiecutter.target_service_slug }}", "extension", "opengraph", "bloodhound"]
