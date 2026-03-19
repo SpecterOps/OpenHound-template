@@ -19,7 +19,7 @@ class AssetProperties({{ cookiecutter.target_service_slug }}NodeProperties):
     node=NodeDef(
         kind=nk.ASSET,
         description="Example Asset",
-        icon="cog"
+        icon="cog",
         properties=AssetProperties
     ),
     edges=[
