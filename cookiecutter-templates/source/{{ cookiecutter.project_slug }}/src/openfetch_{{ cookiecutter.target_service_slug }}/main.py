@@ -1,11 +1,13 @@
-from openfetch.core.app import OpenFetch
-from openfetch.core.collect import CollectContext
-from openfetch.core.convert import ConvertContext
-from openfetch.core.lookup import LookupManager
+from openhound.core.app import OpenHound
+from openhound.core.collect import CollectContext
+from openhound.core.convert import ConvertContext
+from openhound.core.lookup import LookupManager
+from openhound.core.preproc import PreProcContext
 from dlt.extract.source import DltSource
+from .transforms import transforms
 
 # Initialise the base app, specifying the name of the service and optional help for the CLI.
-app = OpenFetch("{{ cookiecutter.target_service_slug }}", help="OpenGraph collector for {{ cookiecutter.target_service_slug }}")
+app = OpenHound("{{ cookiecutter.target_service_slug }}", help="OpenGraph collector for {{ cookiecutter.target_service_slug }}")
 
 
 # Register the collection process. The returned value should contain your custom
@@ -17,9 +19,19 @@ def collect(ctx: CollectContext) -> DltSource:
     Args:
         ctx (CollectContext): Returns DLT pipeline context.
     """
-    from openfetch_{{ cookiecutter.target_service_slug }}.source import source as {{ cookiecutter.target_service_slug }}_source
+    from .source import source as {{ cookiecutter.target_service_slug }}_source
 
     return {{ cookiecutter.target_service_slug }}_source()
+
+
+
+@app.preproc(transformer=transforms)
+def preproc(ctx: PreProcContext):
+    """Build a DuckDB lookup database from collected data."""
+    return {
+        "example_assets": "example_assets",
+    }
+
 
 @app.convert()
 def convert(ctx: ConvertContext) -> DltSource:
@@ -28,6 +40,6 @@ def convert(ctx: ConvertContext) -> DltSource:
     Args:
         ctx (CollectContext): Returns DLT pipeline context.
     """
-    from openfetch_{{ cookiecutter.target_service_slug }}.source import source as {{ cookiecutter.target_service_slug }}_source
+    from .source import source as {{ cookiecutter.target_service_slug }}_source
 
     return {{ cookiecutter.target_service_slug }}_source(), {}
