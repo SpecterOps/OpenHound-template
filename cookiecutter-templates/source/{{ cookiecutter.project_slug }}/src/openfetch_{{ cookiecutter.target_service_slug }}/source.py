@@ -1,5 +1,5 @@
-import dlt
 from dataclasses import dataclass
+from .main import app
 
 from .models.asset import Asset
 
@@ -11,7 +11,7 @@ class SourceContext:
     tenant: str
 
 
-@dlt.resource(name="example_assets", parallelized=True, columns=Asset)
+@app.resource(name="example_assets", parallelized=True, columns=Asset)
 def example_assets(ctx: SourceContext):
     """DLT resource, fetches example assets.
 
@@ -36,7 +36,7 @@ def example_assets(ctx: SourceContext):
         }
 
 
-@dlt.source(name="{{ cookiecutter.target_service_slug }}", max_table_nesting=0)
+@app.source(name="{{ cookiecutter.target_service_slug }}", max_table_nesting=0)
 def source():
     """DLT source, defines {{ cookiecutter.target_service_slug }} collection resources and transformers.
     Add ctx.config/secret.value to method arguments to force specific config values, ex:
