@@ -29,9 +29,33 @@
 OpenHound is a standardized framework for building OpenGraph collectors and converters. Built on [DLT](https://dlthub.com/docs/intro) (Data Load Tool) and [Typer](https://typer.tiangolo.com/), it provides a consistent workflow for collecting, processing, and converting data from any source into BloodHound-compatible graphs. This repository contains a cookiecutter template to get started building your own OpenGraph collector using OpenHound. 
 
 
-## Getting Started
-Run the openhound create collector command to generate a new OpenHound collector project. Links TODO
+## Getting started
+
+OpenHound installs as a CLI tool and is typically executed inside a Python virtual environment. The steps below create an isolated environment and installs the package directly from GitHub.
+
+Once installed, you can explore the available commands with `openhound --help`. The [CLI](cli.md) page covers all the available commands and collection and convert pipelines.
+
+### 1. Prerequisites
+
+- Python 3.12+
+- [uv](https://docs.astral.sh/uv/)
+
+### 2. Install OpenHound
+
+> **Note**: OpenHound is currently under active development. Installation requires Git-based installation until the package is officially published to PyPI.
+
+```console
+uv tool install "openhound @ git+https://github.com/SpecterOps/openhound.git"
+```
+
+### 3. Create a collector
+To create a new collector, run the following command after installing openhound (it may take +- 20 seconds when openhound is started for the first time).
+
+```console
+openhound create collector <path_where_to_create_collector>
+```
+
+This will create a new collector based on this repository's cookiecutter template. The generated collector will include a sample collection and conversion pipeline, as well as a README to get you started.
 
 
-## Acknowledgments
-TODO
+
