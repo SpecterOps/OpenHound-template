@@ -4,16 +4,8 @@
   </a>
 </p>
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".github/OpenFetchLight.svg">
-    <source media="(prefers-color-scheme: light)" srcset=".github/OpenFetchDark.svg">
-    <img alt="Project logo" src=".github/OpenFetchDark.svg" width="25%" style="max-width: 100%;">
-  </picture>
-</p>
-
 <h4 align="center">
-  A BloodHound OpenFetch extension for {{your_service}}
+  A BloodHound OpenHound extension for {{your_service}}
 </h4>
 
 <!-- Standard shields, please do not remove -->
@@ -34,16 +26,14 @@
 ---
 
 ## About
-OpenFetch is a standardized framework for building OpenGraph collectors and converters. Built on [DLT](https://dlthub.com/docs/intro) (Data Load Tool) and [Typer](https://typer.tiangolo.com/), it provides a consistent workflow for collecting, processing, and converting data from any source into BloodHound-compatible graphs.
+OpenHound is a standardized framework for building OpenGraph collectors and converters. Built on [DLT](https://dlthub.com/docs/intro) (Data Load Tool) and [Typer](https://typer.tiangolo.com/), it provides a consistent workflow for collecting, processing, and converting data from any source into BloodHound-compatible graphs.
 
 {{ your_description }}
 
 [![Python Version](https://img.shields.io/badge/Python-3.13-brightgreen.svg)](#about)
 
 ## Getting Started
-- [Getting started](https://didactic-adventure-wrzl3gr.pages.github.io/getting-started/)
-- [CLI reference](https://didactic-adventure-wrzl3gr.pages.github.io/cli)
-
+TODO: Add instructions for installing dependencies, running the collector, and converting data to BloodHound format.
 
 ## Acknowledgments
 {{ acknowledgements }}
