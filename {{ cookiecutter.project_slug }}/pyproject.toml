@@ -24,3 +24,6 @@ dev = [
     "mypy>=1.19.1",
     "zensical>=0.0.27",
 ]
+
+[project.entry-points."openhound.sources"]
+{{ cookiecutter.target_service_slug}} = "openhound_{{ cookiecutter.target_service_slug}}.main:app"
