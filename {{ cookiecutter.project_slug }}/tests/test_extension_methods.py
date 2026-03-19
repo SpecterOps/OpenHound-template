@@ -1,16 +1,16 @@
-from openfetch.core.app import OpenFetch
+from openhound.core.app import OpenHound
 from dlt.extract.validation import PydanticValidator
-from openfetch_{{ cookiecutter.target_service_slug }}.main import app as ext_module
+from openhound_{{ cookiecutter.target_service_slug }}.main import app as ext_module
 try:
-    from openfetch_{{ cookiecutter.target_service_slug }}.source import source as {{ cookiecutter.target_service_slug }}_source
+    from openhound_{{ cookiecutter.target_service_slug }}.source import source as {{ cookiecutter.target_service_slug }}_source
 except Exception as err:
     pass
 
 
-def test_extension_is_openfetch():
+def test_extension_is_openhound():
     assert isinstance(
-        ext_module, OpenFetch
-    ), "Extension is not an instance of OpenFetch"
+        ext_module, OpenHound
+    ), "Extension is not an instance of OpenHound"
 
 
 def test_extensions_contains_collect():
