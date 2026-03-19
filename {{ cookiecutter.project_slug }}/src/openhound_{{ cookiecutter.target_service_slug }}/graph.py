@@ -7,19 +7,20 @@ from openhound.core.models.entries_dataclass import NodeProperties as BaseProper
 @dataclass
 class {{ cookiecutter.target_service_slug }}NodeProperties(BaseProperties):
     """Extends the base properties with additional fields """
-    node_id: str
+    example_of_required_id: str
 
 
 @dataclass
 class {{ cookiecutter.target_service_slug }}Node(BaseNode):
-    properties: {{ cookiecutter.target_service_slug }}Properties  # type: ignore[assignment]
+    properties: {{ cookiecutter.target_service_slug }}NodeProperties  # type: ignore[assignment]
     kinds: list[str]
     id: str = field(init=False)
 
     def __post_init__(self):
-        # Use GitHub's native node_id as the OpenGraph node id so edges can
-        # reference nodes by the same identifier used during collection.
-        self.id = self.properties.node_id
+        # Use the resource's native node_id as the OpenGraph node id so edges can
+        # reference nodes by the same identifier used during collection. Otherwise, create
+        # a dynamic guid using BaseNode.guid(self.properties..., self.properties...)
+        self.id = self.properties.example_of_required_id
 
 
 @dataclass

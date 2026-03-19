@@ -1,7 +1,7 @@
 from openhound.core.asset import BaseAsset, EdgeDef
 from openhound.core.models.entries import Edge, EdgePath
 from openhound_{{ cookiecutter.target_service_slug }}.graph import {{ cookiecutter.target_service_slug }}NodeProperties, {{ cookiecutter.target_service_slug }}Node
-from {{ cookiecutter.target_service_slug }}.kinds import nodes as nk, edges as ek
+from openhound_{{ cookiecutter.target_service_slug }}.kinds import nodes as nk, edges as ek
 from openhound_{{ cookiecutter.target_service_slug }}.main import app
 from openhound.core.asset import BaseAsset, EdgeDef, NodeDef
 from dataclasses import dataclass, field
@@ -20,6 +20,7 @@ class AssetProperties({{ cookiecutter.target_service_slug }}NodeProperties):
         kind=nk.ASSET,
         description="Example Asset",
         icon="cog"
+        properties=AssetProperties
     ),
     edges=[
         EdgeDef(
@@ -38,10 +39,10 @@ class Asset(BaseAsset):
 
     @property
     def as_node(self):
-        properties = {{ cookiecutter.target_service_slug }}NodeProperties(
-            name=self.name, displayname=self.name, hostname=self.hostname
+        properties = AssetProperties(
+            name=self.name, displayname=self.name, hostname=self.hostname, example_of_required_id=str(self.id)
         )
-        return {{ cookiecutter.target_service_slug }}Node(properties=properties)
+        return {{ cookiecutter.target_service_slug }}Node(kinds=[nk.ASSET], properties=properties)
 
     @property
     def _groups_memberships(self):
