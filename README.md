@@ -5,7 +5,7 @@
 </p>
 
 <h4 align="center">
-  A BloodHound OpenHound extension for {{your_service}}
+  A OpenHound template to create your own OpenGraph collector 
 </h4>
 
 <!-- Standard shields, please do not remove -->
@@ -26,14 +26,12 @@
 ---
 
 ## About
-OpenHound is a standardized framework for building OpenGraph collectors and converters. Built on [DLT](https://dlthub.com/docs/intro) (Data Load Tool) and [Typer](https://typer.tiangolo.com/), it provides a consistent workflow for collecting, processing, and converting data from any source into BloodHound-compatible graphs.
+OpenHound is a standardized framework for building OpenGraph collectors and converters. Built on [DLT](https://dlthub.com/docs/intro) (Data Load Tool) and [Typer](https://typer.tiangolo.com/), it provides a consistent workflow for collecting, processing, and converting data from any source into BloodHound-compatible graphs. This repository contains a cookiecutter template to get started building your own OpenGraph collector using OpenHound. 
 
-{{ your_description }}
-
-[![Python Version](https://img.shields.io/badge/Python-3.13-brightgreen.svg)](#about)
 
 ## Getting Started
-TODO: Add instructions for installing dependencies, running the collector, and converting data to BloodHound format.
+Run the openhound create collector command to generate a new OpenHound collector project. Links TODO
+
 
 ## Acknowledgments
-{{ acknowledgements }}
+TODO
