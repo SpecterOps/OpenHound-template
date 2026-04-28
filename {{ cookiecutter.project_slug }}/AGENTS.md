@@ -1,11 +1,11 @@
 # AGENTS.md - Agent Guidance
 
-This file should always be used as the entrypoint for agents working in this repository. Keep it generic and concise. Project-specific standards live under the `standards/` directory and task-specific guidance lives in the relevant skill files under `skills/`.
+This file should always be used as the entrypoint for agents working in this repository. Keep it generic and concise. Project-specific standards live under `.agents/standards/` and task-specific guidance lives in the relevant skill files under `.agents/skills/`.
 
 ## Before Editing
-- Read `./standards/openhound.md` before making OpenHound collector changes.
-- Read `./standards/workflow.md` before developing a new collector or making broad collector changes.
-- Load the relevant skill from `./skills/` for task-specific workflows.
+- Read `.agents/standards/openhound.md` before making OpenHound collector changes.
+- Read `.agents/standards/workflow.md` before developing a new collector or making broad collector changes.
+- Load the relevant skill from `.agents/skills/` for task-specific workflows.
 
 ## Task Skills
 
