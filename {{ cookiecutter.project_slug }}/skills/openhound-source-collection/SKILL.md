@@ -14,7 +14,7 @@ Use this skill when editing `src/<pkg>/source.py` or changing when/how upstream 
 - A `SourceContext` dataclass for the authenticated client and shared state.
 - `@app.resource(...)` functions defining how resources are collected from the API.
 - `@app.transformer(...)` functions for nested collection seeded by parent `@app.resource` resources.
-- An `@app.source(...)` function that declares credentials, builds context and returns resources/transformeres to be processed.
+- An `@app.source(...)` function that declares credentials, builds context and returns resources/transformers to be processed.
 
 ## Authentication
 

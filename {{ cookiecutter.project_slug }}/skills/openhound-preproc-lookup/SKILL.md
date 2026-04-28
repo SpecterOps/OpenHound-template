@@ -93,7 +93,7 @@ class EXLookup(LookupManager):
         )
 ```
 
-Prefer small lookup methods with clear names. Return `_find_single_object` will return `None` by default if no match is found.
+Prefer small lookup methods with clear names. The `_find_single_object` method will return `None` if no results are found.
 
 ## Convert Registration
 

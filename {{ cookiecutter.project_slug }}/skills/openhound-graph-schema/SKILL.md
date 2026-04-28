@@ -43,7 +43,7 @@ class EXNodeProperties(BaseProperties):
     node_id: str
 ```
 
-Every field must include docstrings specifying the attributes with a description because this metadata is used for generated documentation.
+Every field must include docstrings specifying the attributes with a description because this is used for generated documentation.
 
 ## Node Class
 

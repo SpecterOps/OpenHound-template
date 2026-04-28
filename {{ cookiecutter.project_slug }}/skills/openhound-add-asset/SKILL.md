@@ -1,6 +1,6 @@
 ---
 name: openhound-add-asset
-description: Use when adding or modifying an OpenHound collected resource (ie. Asset), model file, node asset, edge-only asset, kind constants, or model exports.
+description: Use when adding or modifying an OpenHound collected resource (i.e. Asset), model file, node asset, edge-only asset, kind constants, or model exports.
 ---
 
 # OpenHound Add Asset Skill
