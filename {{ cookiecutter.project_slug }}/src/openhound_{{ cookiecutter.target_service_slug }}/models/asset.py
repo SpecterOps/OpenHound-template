@@ -8,9 +8,12 @@ from dataclasses import dataclass, field
 
 @dataclass
 class AssetProperties({{ cookiecutter.target_service_slug }}NodeProperties):
-    hostname: str = field(
-        metadata={"description": "The hostname of an asset"}
-    )
+    """Example Asset
+
+    Attributes:
+        hostname: The hostname of the example asset
+    """
+    hostname: str
 
 
 # The resource decorator specifies that the model is an OpenGraph asset

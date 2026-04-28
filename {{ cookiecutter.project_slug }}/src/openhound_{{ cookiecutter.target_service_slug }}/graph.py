@@ -6,7 +6,11 @@ from openhound.core.models.entries_dataclass import NodeProperties as BaseProper
 
 @dataclass
 class {{ cookiecutter.target_service_slug }}NodeProperties(BaseProperties):
-    """Extends the base properties with additional fields """
+    """Extends the base properties with additional fields
+
+    Attributes:
+        example_of_required_id: an example field representing a required identifier for the node, used to set the node's id
+    """
     example_of_required_id: str
 
 
