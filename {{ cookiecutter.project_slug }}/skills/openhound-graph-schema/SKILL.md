@@ -28,7 +28,7 @@ The base properties class should extend `NodeProperties` from `openhound.core.mo
 Add only fields that every node in the extension should have.
 
 ```python
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from openhound.core.models.entries_dataclass import NodeProperties as BaseProperties
 

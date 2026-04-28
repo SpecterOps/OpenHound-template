@@ -28,10 +28,10 @@ The raw fields on the `BaseAsset` class should mirror the collected JSONL schema
 
 ## Property Dataclasses
 
-Every OpenGraph property field must include a description:
+Every OpenGraph property field must be documented in the class docstring's `Attributes` section:
 
 ```python
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from openhound_<pkg>.graph import EXNodeProperties
 

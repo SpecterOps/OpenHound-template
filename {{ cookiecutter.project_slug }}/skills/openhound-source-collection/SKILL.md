@@ -105,7 +105,7 @@ Use `max_table_nesting=0` unless there is a concrete reason to let DLT infer nes
 - Keep node/edge conversion logic out of `source.py`. Conversion belongs in model classes.
 - Do not make resource functions reach into DuckDB lookup data.
 - Avoid collecting fields that are not needed for graph conversion, lookup, metadata, or debugging.
-- Do NOT store any sensitive data retrieved from the API.
+- Do not collect or emit secrets, tokens, credentials, private keys, or credential-equivalent material.
 - Name resources after the raw table they produce, using stable plural table names where practical.
 
 ## Checklist
