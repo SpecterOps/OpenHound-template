@@ -9,7 +9,7 @@ class {{ cookiecutter.target_service_slug }}NodeProperties(BaseProperties):
     """Extends the base properties with additional fields
 
     Attributes:
-        example_of_required_id: an example field representing a required identifier for the node, used to set the node's id
+        example_of_required_id: An example field representing a required identifier for the node, used to set the node's ID.
     """
     example_of_required_id: str
 
