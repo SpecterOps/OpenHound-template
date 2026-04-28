@@ -126,6 +126,18 @@ Every collected entity lives in `src/<pkg>/models/<name>.py` and must define **t
 
 A `@dataclass` extending the extension's base `<Slug>NodeProperties`. Add fields unique to this entity. Every field must carry `metadata={"description": "..."}`.
 
+For optional fields, prefer explicit nullable types with `None` defaults over placeholder empty strings when the value may be absent. This applies especially to auto-generated documentation fields such as `query_*` helpers and relational metadata:
+
+```python
+query_repositories: str | None = None
+environment_name: str | None = None
+group_name: str | None = field(
+    default=None, metadata={"description": "The runner group display name."}
+)
+```
+
+This keeps the schema honest and produces better auto documentation than using `""` as a sentinel for "not present".
+
 ```python
 @dataclass
 class AssetProperties(EXNodeProperties):
@@ -179,6 +191,37 @@ class Asset(BaseAsset):
                 end=EdgePath(value=group, match_by="id"),
             )
 ```
+
+### Edge definition / emission alignment
+
+Only declare `EdgeDef(...)` entries on the asset class that actually emits those edges in its `edges` property.
+
+- If a node-bearing asset only creates the node, keep it as `@app.asset(node=NodeDef(...))` and return no edges.
+- If relationships are modeled by a separate edge-only asset, put the `EdgeDef(...)` declarations on that edge-only asset instead.
+
+This keeps auto-generated edge documentation aligned with the real emitter.
+
+### Prefer yielding edges over building lists
+
+Prefer generators (`yield` / `yield from`) for `edges` and edge helper properties instead of accumulating arrays and returning them. This is the standard pattern in the upstream changes and keeps edge composition readable:
+
+```python
+@property
+def _contains_edge(self):
+    yield Edge(...)
+
+@property
+def _access_edges(self):
+    for target_id in self.target_ids:
+        yield Edge(...)
+
+@property
+def edges(self):
+    yield from self._access_edges
+    yield from self._contains_edge
+```
+
+This is preferred over building `edges = []`, appending/extending, and returning the array.
 
 **Using `self._lookup` in `as_node`**: when the node needs data from a different collected table (e.g. resolving a parent org ID), call the lookup manager:
 
