@@ -31,7 +31,7 @@ Review these before finishing:
 Use an isolated uv virtual environment outside the repository so validation does not modify the user's local `.venv`:
 
 ```bash
-export UV_PROJECT_ENVIRONMENT=/tmp/openhound-<source>-venv 
+export UV_PROJECT_ENVIRONMENT=/tmp/openhound-<source>-venv
 uv run pytest
 uv run ruff check src/
 uv run mypy src/
