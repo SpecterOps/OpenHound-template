@@ -29,7 +29,7 @@ If required information is missing, ask focused questions before designing imple
 
 Define the collector identity:
 
-- Source name used by `OpenHound("<source>")`.
+- Source name and source_kind  used by `OpenHound("<source>", source_kind=<kind>)`.
 - Python package name, normally `openhound_<source>`.
 - Short uppercase graph prefix, usually two to four characters.
 - Extension metadata values for `extension.yaml`.
@@ -60,6 +60,8 @@ Create a graph inventory:
 | Node | Kind constant | Source resource | Stable ID | Notes |
 |---|---|---|---|---|
 | User | `USER` | `users` | Native user ID | Example node. |
+
+Include one root/environment node for the collected environment. Other emitted nodes should set `environmentid` to that node's OpenGraph ID.
 
 | Edge | Start | End | Source resource | Lookup needed |
 |---|---|---|---|---|
