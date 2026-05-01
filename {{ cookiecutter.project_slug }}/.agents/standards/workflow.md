@@ -36,3 +36,4 @@ Use this workflow when developing a new OpenHound collector or making broad coll
 ## Working Rules
 
 - Keep `AGENTS.md` as the entrypoint and `.agents/standards/openhound.md` as the source of OpenHound rules.
+- Use a uv virtual environment outside the repository for validation commands to avoid modifying the user's local `.venv`.
