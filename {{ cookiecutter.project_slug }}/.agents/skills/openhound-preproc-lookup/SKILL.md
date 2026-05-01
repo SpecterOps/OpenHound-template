@@ -45,6 +45,13 @@ def transforms(con: duckdb.DuckDBPyConnection, schema: str = "myservice") -> Non
 
 Use parameter binding for values. Schema and table names are often interpolated because DuckDB does not bind identifiers; keep those values internal and trusted.
 
+Use DuckDB JSON operators for JSON object fields loaded from raw resources:
+
+```sql
+SELECT metadata->>'name' AS name
+FROM myservice.assets
+```
+
 ## Preproc Registration
 
 The `preproc` function in `main.py` returns a mapping of DuckDB table name to JSONL table name. Only listed tables are loaded into the lookup DB.
@@ -59,6 +66,8 @@ def preproc(ctx: PreProcContext) -> dict[str, str]:
 ```
 
 If no SQL transforms are needed, the transformer can be omitted. If lookup methods depend on transformed tables, ensure the transformer is registered.
+
+If `lookup.py` reads a table created by `transforms.py`, use `@app.preproc(transformer=transforms)`.
 
 ## Lookup Manager
 
@@ -143,6 +152,7 @@ Document in the collector README when users must run `preproc` before `convert`.
 - Required raw tables are included in `main.py`'s `preproc` mapping.
 - SQL transforms create any derived tables used by lookup methods.
 - `@app.preproc(transformer=transforms)` is used when transforms are required.
+- `@app.preproc(transformer=transforms)` is used when lookup reads transformed tables.
 - `lookup.py` contains cached lookup methods.
 - `@app.convert(lookup=<PREFIX>Lookup)` is registered.
 - Models handle missing lookup results.
