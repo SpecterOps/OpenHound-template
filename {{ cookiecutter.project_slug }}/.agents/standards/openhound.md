@@ -16,7 +16,7 @@ collect -> preproc -> convert
 | `preproc` | Optionally load raw tables into DuckDB and build lookup/derived tables. |
 | `convert` | Read JSONL plus lookup data and emit OpenGraph nodes/edges. |
 
-All phases are registered in `src/<pkg>/main.py` using one `OpenHound("<source>")` app instance and the `@app.collect()`, `@app.preproc()`, and `@app.convert()` decorators.
+All phases are registered in `src/<pkg>/main.py` using one `OpenHound("<source>", <root-kind>)` app instance and the `@app.collect()`, `@app.preproc()`, and `@app.convert()` decorators.
 
 ## Naming Conventions
 
@@ -37,6 +37,8 @@ Common patterns: `<PREFIX>NodeProperties`, `<PREFIX>Node`, `<PREFIX>EdgeProperti
 - Define node kind strings in `src/<pkg>/kinds/nodes.py`.
 - Define edge kind strings in `src/<pkg>/kinds/edges.py`.
 - Import kind constants from `kinds/`. Do not hardcode kind strings in model files.
+- Every collector must define and emit one root/environment node for the collected environment. For Okta this is an Organization node, for Jamf the Tenant node.
+- Every emitted node must set `environmentid` to the OpenGraph ID of the collector's root/environment node.
 - Use stable string node IDs from native opaque/global IDs when available.
 - Do not use raw integer primary keys as OpenGraph node IDs.
 - If no native ID exists, derive a stable ID with `BaseNode.guid(...)` from reproducible properties.
