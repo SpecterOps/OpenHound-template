@@ -1,8 +1,11 @@
 # AGENTS.md - Agent Guidance
 
-This file should always be used as the entrypoint for agents working in this repository. Keep it generic and concise. Project-specific standards live under `.agents/standards/` and task-specific guidance lives in the relevant skill files under `.agents/skills/`.
+This file should always be used as the entrypoint for agents working in this repository. Keep it generic and concise.
+Project-specific standards live under `.agents/standards/` and task-specific guidance lives in the relevant skill files
+under `.agents/skills/`.
 
 ## Before Editing
+
 - Read `.agents/standards/openhound.md` before making OpenHound collector changes.
 - Read `.agents/standards/workflow.md` before developing a new collector or making broad collector changes.
 - Load the relevant skill from `.agents/skills/` for task-specific workflows.
@@ -30,6 +33,7 @@ Behavioral guidelines. Merge with project-specific instructions as needed.
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
+
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them - don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
@@ -52,12 +56,14 @@ Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, sim
 **Touch only what you must. Clean up only your own mess.**
 
 When editing existing code:
+
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
 - If you notice unrelated dead code, mention it - don't delete it.
 
 When your changes create orphans:
+
 - Remove imports/variables/functions that YOUR changes made unused.
 - Don't remove pre-existing dead code unless asked.
 
@@ -68,11 +74,13 @@ The test: Every changed line should trace directly to the user's request.
 **Define success criteria. Loop until verified.**
 
 Transform tasks into verifiable goals:
+
 - "Add validation" → "Write tests for invalid inputs, then make them pass"
 - "Fix the bug" → "Write a test that reproduces it, then make it pass"
 - "Refactor X" → "Ensure tests pass before and after"
 
 For multi-step tasks, state a brief plan:
+
 ```
 1. [Step] → verify: [check]
 2. [Step] → verify: [check]
@@ -81,6 +89,17 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+### 5. Protect User State
+
+**Do not disturb the user's local environment or unrelated work.**
+
+- Use an isolated uv virtual environment outside the repository for validation commands, for example `UV_PROJECT_ENVIRONMENT=/tmp/openhound-venv uv run pytest`.
+- Do not create, remove, rebuild, or modify the repository-local `.venv` unless explicitly asked.
+- Do not revert, rewrite, or clean up unrelated worktree changes.
+- Do not remove files or code that are outside the task scope unless they are made obsolete by your own changes.
+- If a validation command would alter user state or require credentials/external services, report that instead of forcing it.
+
 ---
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and
+clarifying questions come before implementation rather than after mistakes.
