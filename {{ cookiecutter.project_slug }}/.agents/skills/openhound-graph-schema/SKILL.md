@@ -45,6 +45,8 @@ class EXNodeProperties(BaseProperties):
 
 Every field must include docstrings specifying the attributes with a description because this is used for generated documentation.
 
+Every collector should have one root/environment node. When a collector emits multiple resource nodes, include `environmentid` in the base node properties and set it to the OpenGraph ID of that root/environment node.
+
 ## Node Class
 
 The node class should extend `Node` from `openhound.core.models.entries_dataclass` and set `self.id` in `__post_init__`.
@@ -112,5 +114,6 @@ Add shared fields only when they apply broadly across extension edges. Entity-sp
 - Node class extends the OpenHound base node class.
 - `id` is assigned in `__post_init__`.
 - Node ID is stable and string-compatible.
+- Base node properties include `environmentid` when the collector emits a root/environment node.
 - Every graph property contains docstrings with an "Attributes" section describing each field.
 - Run the validation skill before finishing.
