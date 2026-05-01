@@ -69,7 +69,7 @@ from openhound_<pkg>.main import app
 
 
 @app.asset(
-    node=NodeDef(kind=nk.ASSET, description="Example asset", icon="cog"),
+    node=NodeDef(kind=nk.ASSET, properties=AssetProperties, description="Example asset", icon="cog"),
     edges=[
         EdgeDef(
             start=nk.ASSET,
@@ -90,6 +90,7 @@ class Asset(BaseAsset):
             node_id=self.id,
             name=self.name,
             displayname=self.name,
+            environmentid=self._extras["environmentid"],
         )
         return EXNode(properties=properties, kinds=[nk.ASSET])
 
@@ -108,6 +109,8 @@ class Asset(BaseAsset):
 Only declare `EdgeDef(...)` entries on the asset class that emits those edges from its `edges` property.
 
 If a node-bearing asset creates only a node, use only `node=NodeDef(...)` and emit no edges. If relationships are represented by a separate edge-only asset, put the `EdgeDef(...)` declarations on that edge-only asset.
+
+If a helper emits a shared edge, such as a root/environment containment edge, declare the matching `EdgeDef(...)` on every asset that yields it.
 
 ## Edge Emission Style
 
@@ -143,6 +146,7 @@ def as_node(self) -> EXNode:
 - Create or update `src/<pkg>/models/<name>.py`.
 - Add node kind constants to `kinds/nodes.py` if the asset emits nodes.
 - Add edge kind constants to `kinds/edges.py` if the asset emits edges.
+- Assets returning a node must pass the emitted property dataclass into `NodeDef(properties=...)`.
 - Export the model from `src/<pkg>/models/__init__.py`.
 - Add or update a resource or transformer in `source.py`.
 - Wire the resource or transformer into the source return tuple.
