@@ -44,6 +44,7 @@ Common patterns: `<PREFIX>NodeProperties`, `<PREFIX>Node`, `<PREFIX>EdgeProperti
 - If no native ID exists, derive a stable ID with `BaseNode.guid(...)` from reproducible properties.
 - Every graph property contains docstrings with an "Attributes" section describing each field.
 - Keep `EdgeDef(...)` declarations aligned with the asset class that actually emits those edges.
+- Prefer `ConditionalEdgePath` for edges to existing nodes when the target can be resolved by stable node properties; use `EdgePath(value=..., match_by="id")` when the exact stable OpenGraph node ID is known.
 - Prefer yielding edges with `yield` / `yield from` instead of building edge lists.
 - Run `preproc` before `convert` when `self._lookup` is used.
 

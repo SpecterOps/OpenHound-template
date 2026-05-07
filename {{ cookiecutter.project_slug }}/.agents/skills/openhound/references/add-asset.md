@@ -124,6 +124,34 @@ def edges(self):
 
 Avoid building `edges = []`, appending items, and returning the list unless there is a specific reason.
 
+## Conditional Edge Paths
+
+Prefer `ConditionalEdgePath` when creating an edge to an existing node that should be resolved by node properties instead of a known OpenGraph ID.
+
+Use `PropertyMatch` entries for the stable property constraints needed to uniquely identify the target node. Avoid weak matchers, such as only `name`, unless the upstream domain guarantees uniqueness.
+
+Use `EdgePath(value=..., match_by="id")` when the exact stable node ID is already known.
+
+```python
+from openhound.core.models.entries import ConditionalEdgePath, Edge, EdgePath, PropertyMatch
+from openhound.core.models.entries_dataclass import EdgeProperties
+
+
+yield Edge(
+    kind=ek.MEMBERSHIP_SYNC,
+    start=ConditionalEdgePath(
+        kind=nk.GROUP,
+        property_matchers=[
+            PropertyMatch(key="tenant_domain", value=source_domain),
+            PropertyMatch(key="type", value="OKTA_GROUP"),
+            PropertyMatch(key="name", value=self.profile.name.upper()),
+        ],
+    ),
+    end=EdgePath(value=self.id, match_by="id"),
+    properties=EdgeProperties(traversable=True),
+)
+```
+
 ## Lookup Usage
 
 Use `self._lookup` inside `as_node` or `edges` only when `preproc` creates and registers the required lookup data.

@@ -62,5 +62,6 @@ The canonical rules live in `.agents/standards/openhound.md`. These are repeated
 - Node IDs must be stable strings, not raw integer primary keys.
 - Every OpenGraph property dataclass field must be documented in the class docstring `Attributes` section.
 - Keep `EdgeDef(...)` declarations aligned with the asset that emits the edge.
+- Prefer `ConditionalEdgePath` for edges to existing nodes when matching by stable node properties.
 - Prefer `yield` / `yield from` for edge emission.
 - Run available validation checks before completion.

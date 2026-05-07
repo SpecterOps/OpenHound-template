@@ -14,6 +14,7 @@ Review these before finishing:
 - Every OpenGraph property dataclass field is documented in the class docstring's `Attributes` section.
 - Every node-bearing asset declares `NodeDef(properties=...)`.
 - `EdgeDef(...)` declarations match edges actually yielded by the same asset class.
+- Edges to existing nodes use `ConditionalEdgePath` when property-based resolution is more reliable than constructing or guessing an ID.
 - Edge properties use `yield` or `yield from` unless a list is explicitly justified.
 - Models using `self._lookup` have `@app.convert(lookup=...)` registered.
 - Tables required by lookup methods are included in the `preproc` map or created by transforms.
@@ -47,6 +48,7 @@ If a command cannot run because dependencies, credentials, generated template va
 | Create multiple `OpenHound` app instances | Keep one app in `main.py`. |
 | Declare edges on a different asset than the emitter | Put `EdgeDef(...)` on the emitting asset. |
 | Emit nodes without `environmentid` | Set `environmentid` to the root/environment node ID. |
+| Guess another node's ID manually | Use `ConditionalEdgePath` with stable `PropertyMatch` constraints. |
 
 ## Search Checks
 
