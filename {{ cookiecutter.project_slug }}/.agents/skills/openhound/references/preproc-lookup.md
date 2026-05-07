@@ -1,11 +1,6 @@
----
-name: openhound-preproc-lookup
-description: Use when adding or modifying (DuckDB) preprocessing logic, transforms, LookupManager methods, lookup table registration or self._lookup usage during conversion.
----
+# OpenHound Preproc And Lookup
 
-# OpenHound Preproc And Lookup Skill
-
-Use this skill when relationships or node properties require data from multiple collected tables.
+Use this reference when relationships or node properties require data from multiple collected tables.
 
 ## Purpose
 
@@ -156,4 +151,4 @@ Document in the collector README when users must run `preproc` before `convert`.
 - `lookup.py` contains cached lookup methods.
 - `@app.convert(lookup=<PREFIX>Lookup)` is registered.
 - Models handle missing lookup results.
-- Run the validation skill before finishing.
+- Read `references/validate-extension.md` before finishing.

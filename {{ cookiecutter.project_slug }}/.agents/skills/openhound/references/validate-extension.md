@@ -1,11 +1,6 @@
----
-name: openhound-validate-extension
-description: Use before finishing OpenHound collector changes to run tests, linting, type checks, and structural sanity checks.
----
+# OpenHound Validate Extension
 
-# OpenHound Validate Extension Skill
-
-Use this skill before finishing changes to an OpenHound collector.
+Use this reference before finishing changes to an OpenHound collector.
 
 ## Structural Checks
 

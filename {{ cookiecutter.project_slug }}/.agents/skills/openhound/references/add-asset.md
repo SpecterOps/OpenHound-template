@@ -1,11 +1,6 @@
----
-name: openhound-add-asset
-description: Use when adding or modifying an OpenHound collected resource (i.e. Asset), model file, node asset, edge-only asset, kind constants, or model exports.
----
+# OpenHound Add Asset
 
-# OpenHound Add Asset Skill
-
-Use this skill when adding a new resource model under `src/<pkg>/models/` or changing how a model emits nodes and edges.
+Use this reference when adding a new resource model under `src/<pkg>/models/` or changing how a model emits nodes and edges.
 
 ## Files Usually Touched
 
@@ -151,4 +146,4 @@ def as_node(self) -> EXNode:
 - Add or update a resource or transformer in `source.py`.
 - Wire the resource or transformer into the source return tuple.
 - If lookup data is needed, update `transforms.py`, `lookup.py`, and the `preproc` table map in `main.py`.
-- Run the validation skill before finishing.
+- Read `references/validate-extension.md` before finishing.

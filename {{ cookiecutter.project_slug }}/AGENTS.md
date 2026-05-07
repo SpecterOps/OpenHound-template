@@ -16,13 +16,13 @@ Use `openhound` for all OpenHound collector work. The skill routes tasks to acti
 
 | Task                                                                                   | Skill       | Reference |
 |----------------------------------------------------------------------------------------|-------------|---|
-| Plan a new collector from target service requirements or API docs                      | `openhound` | `references/plan-collector.md` |
-| Add or modify a collected asset/model                                                  | `openhound` | `references/add-asset.md` |
-| Implement API collection resources, transformers, auth and DLT source wiring           | `openhound` | `references/source-collection.md` |
-| Define base graph node/edge dataclasses and ID generation behavior                     | `openhound` | `references/graph-schema.md` |
-| Add DuckDB transforms or lookup methods                                                | `openhound` | `references/preproc-lookup.md` |
-| Wire phase registration (collect, preproc, convert), metadata, or package entry points | `openhound` | `references/register-extension.md` |
-| Validate a collector before finishing                                                  | `openhound` | `references/validate-extension.md` |
+| Plan a new collector from target service requirements or API docs                      | `openhound` | `.agents/skills/openhound/references/plan-collector.md` |
+| Add or modify a collected asset/model                                                  | `openhound` | `.agents/skills/openhound/references/add-asset.md` |
+| Implement API collection resources, transformers, auth and DLT source wiring           | `openhound` | `.agents/skills/openhound/references/source-collection.md` |
+| Define base graph node/edge dataclasses and ID generation behavior                     | `openhound` | `.agents/skills/openhound/references/graph-schema.md` |
+| Add DuckDB transforms or lookup methods                                                | `openhound` | `.agents/skills/openhound/references/preproc-lookup.md` |
+| Wire phase registration (collect, preproc, convert), metadata, or package entry points | `openhound` | `.agents/skills/openhound/references/register-extension.md` |
+| Validate a collector before finishing                                                  | `openhound` | `.agents/skills/openhound/references/validate-extension.md` |
 
 ## General Rules
 

@@ -1,11 +1,6 @@
----
-name: openhound-register-extension
-description: Use when wiring OpenHound phases, extension metadata, pyproject entry points or extension discovery behavior.
----
+# OpenHound Register Extension
 
-# OpenHound Register Extension Skill
-
-Use this skill when editing `main.py`, `extension.yaml`, package entry points, or extension identity metadata.
+Use this reference when editing `main.py`, `extension.yaml`, package entry points, or extension identity metadata.
 
 ## Phase Registration
 
@@ -134,4 +129,4 @@ Optional: For the cookiecutter template, preserve template variables when editin
 - Convert registers lookup when models use `self._lookup`.
 - `extension.yaml` matches source credentials and parameters.
 - `pyproject.toml` entry point targets `openhound_<service>.main:app`.
-- Run the validation skill before finishing.
+- Read `references/validate-extension.md` before finishing.

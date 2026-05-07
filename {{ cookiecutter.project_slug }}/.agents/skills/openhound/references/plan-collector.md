@@ -1,13 +1,8 @@
----
-name: openhound-plan-collector
-description: Use when planning/building a new OpenHound collector from target service requirements, API documentation, or sample responses.
----
+# OpenHound Plan Collector
 
-# OpenHound Plan Collector Skill
+Use this reference before implementing a new collector or making broad collector changes. The output should be a concise design brief that maps the target service into OpenHound resources, graph nodes, edges, and follow-up implementation references.
 
-Use this skill before implementing a new collector or making broad collector changes. The output should be a concise design brief that maps the target service into OpenHound resources, graph nodes, edges, and follow-up implementation skills.
-
-Do not implement collection, models, lookup logic, or metadata from this skill. Use it to decide what should be built and in what order.
+Do not implement collection, models, lookup logic, or metadata from this reference. Use it to decide what should be built and in what order.
 
 ## Inputs To Gather
 
@@ -82,14 +77,14 @@ If no cross-table resolution is needed, explicitly say preproc/lookup is not req
 
 ### 6. Implementation Order
 
-Map the plan to skills:
+Map the plan to references:
 
-1. `openhound-graph-schema` for graph base types and ID strategy.
-2. `openhound-register-extension` for phase registration and metadata.
-3. `openhound-source-collection` for API resources and transformers.
-4. `openhound-add-asset` for each model, node, edge, and kind constant.
-5. `openhound-preproc-lookup` only when cross-table lookup is required.
-6. `openhound-validate-extension` before finishing.
+1. `references/graph-schema.md` for graph base types and ID strategy.
+2. `references/register-extension.md` for phase registration and metadata.
+3. `references/source-collection.md` for API resources and transformers.
+4. `references/add-asset.md` for each model, node, edge, and kind constant.
+5. `references/preproc-lookup.md` only when cross-table lookup is required.
+6. `references/validate-extension.md` before finishing.
 
 ## Output Format
 
@@ -119,7 +114,7 @@ Produce a short collector design brief:
 - <needed/not needed and why>
 
 ## Implementation Sequence
-1. <skill and concrete target>
+1. <reference and concrete target>
 ```
 
 Keep the brief practical. Avoid speculative resources, edges, or abstractions that are not supported by the target service requirements or API data.

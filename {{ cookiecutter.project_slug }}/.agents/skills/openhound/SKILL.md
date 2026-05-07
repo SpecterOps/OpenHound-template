@@ -7,10 +7,12 @@ description: Use for all OpenHound collector work, including planning, graph sch
 
 Use this skill for any OpenHound collector task.
 
-Before editing collector code:
+## Use Protocol
 
-- Read `.agents/standards/openhound.md`.
-- For broad collector work, also read `.agents/standards/workflow.md`.
+1. Read `.agents/standards/openhound.md` before editing collector code.
+2. Select every matching reference from the routing table.
+3. For broad collector work, or when creating a new collector, also read `.agents/standards/workflow.md`.
+4. Before finishing collector behavior changes, read `references/validate-extension.md`.
 
 ## Route By Task
 
@@ -32,7 +34,25 @@ Before editing collector code:
 - If models use `self._lookup`, also read `references/preproc-lookup.md` and `references/register-extension.md`.
 - If adding a new collected resource, usually read `references/source-collection.md`, `references/add-asset.md`, and `references/validate-extension.md`.
 
-## Shared OpenHound Invariants
+## Common Task Bundles
+
+| User request | Read these references |
+|---|---|
+| Build a new collector | `references/plan-collector.md`, `references/graph-schema.md`, `references/register-extension.md`, `references/source-collection.md`, `references/add-asset.md`, `references/validate-extension.md` |
+| Add a new collected resource | `references/source-collection.md`, `references/add-asset.md`, `references/validate-extension.md` |
+| Add a relationship needing joins | `references/add-asset.md`, `references/preproc-lookup.md`, `references/register-extension.md`, `references/validate-extension.md` |
+| Fix lookup or preproc behavior | `references/preproc-lookup.md`, `references/register-extension.md`, `references/validate-extension.md` |
+| Update metadata or entry points | `references/register-extension.md`, `references/validate-extension.md` |
+
+## Do Not Use For
+
+- General Python changes unrelated to OpenHound collectors.
+- Repository maintenance that does not touch collector behavior.
+- Documentation-only edits outside `.agents/`, unless they describe OpenHound collector behavior.
+
+## Quick Non-Negotiables
+
+The canonical rules live in `.agents/standards/openhound.md`. These are repeated here because they are easy to miss:
 
 - Keep exactly one `OpenHound` app instance in `src/<pkg>/main.py`.
 - Define kind strings only in `kinds/nodes.py` and `kinds/edges.py`.

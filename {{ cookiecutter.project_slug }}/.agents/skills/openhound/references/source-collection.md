@@ -1,11 +1,6 @@
----
-name: openhound-source-collection
-description: Use when implementing OpenHound/DLT source collection logic, API clients, auth, resources, transformers, pagination, or DLT secrets.
----
+# OpenHound Source Collection
 
-# OpenHound Source Collection Skill
-
-Use this skill when editing `src/<pkg>/source.py` or changing when/how upstream API data is collected.
+Use this reference when editing `src/<pkg>/source.py` or changing when/how upstream API data is collected.
 
 ## Source Pattern
 
@@ -116,4 +111,4 @@ Use `max_table_nesting=0` unless there is a concrete reason to let DLT infer nes
 - The Pydantic model should be saved under `models/` and exported from `models/__init__.py`.
 - Parent resources reused by transformers are assigned to variables before piping.
 - All resources/transformers are returned from the source function.
-- Run the validation skill before finishing.
+- Read `references/validate-extension.md` before finishing.

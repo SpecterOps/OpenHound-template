@@ -1,11 +1,6 @@
----
-name: openhound-graph-schema
-description: Use when defining or modifying graph.py, base node properties, node ID generation logic, edge properties or extension-wide graph dataclasses.
----
+# OpenHound Graph Schema
 
-# OpenHound Graph Schema Skill
-
-Use this skill when editing `src/<pkg>/graph.py` or changing extension-wide OpenGraph node and edge property behavior.
+Use this reference when editing `src/<pkg>/graph.py` or changing extension-wide OpenGraph node and edge property behavior.
 
 ## Purpose
 
@@ -116,4 +111,4 @@ Add shared fields only when they apply broadly across extension edges. Entity-sp
 - Node ID is stable and string-compatible.
 - Base node properties include `environmentid` when the collector emits a root/environment node.
 - Every graph property contains docstrings with an "Attributes" section describing each field.
-- Run the validation skill before finishing.
+- Read `references/validate-extension.md` before finishing.
