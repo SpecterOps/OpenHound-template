@@ -8,19 +8,21 @@ under `.agents/skills/`.
 
 - Read `.agents/standards/openhound.md` before making OpenHound collector changes.
 - Read `.agents/standards/workflow.md` before developing a new collector or making broad collector changes.
-- Load the relevant skill from `.agents/skills/` for task-specific workflows.
+- Load the `openhound` skill from `.agents/skills/openhound/` for task-specific workflows.
 
-## Task Skills
+## Task Skill
 
-| Task                                                                                   | Skill                          |
-|----------------------------------------------------------------------------------------|--------------------------------|
-| Plan a new collector from target service requirements or API docs                      | `openhound-plan-collector`     |
-| Add or modify a collected asset/model                                                  | `openhound-add-asset`          |
-| Implement API collection resources, transformers, auth and DLT source wiring           | `openhound-source-collection`  |
-| Define base graph node/edge dataclasses and ID generation behavior                     | `openhound-graph-schema`       |
-| Add DuckDB transforms or lookup methods                                                | `openhound-preproc-lookup`     |
-| Wire phase registration (collect, preproc, convert), metadata, or package entry points | `openhound-register-extension` |
-| Validate a collector before finishing                                                  | `openhound-validate-extension` |
+Use `openhound` for all OpenHound collector work. The skill routes tasks to action-specific references.
+
+| Task                                                                                   | Skill       | Reference |
+|----------------------------------------------------------------------------------------|-------------|---|
+| Plan a new collector from target service requirements or API docs                      | `openhound` | `references/plan-collector.md` |
+| Add or modify a collected asset/model                                                  | `openhound` | `references/add-asset.md` |
+| Implement API collection resources, transformers, auth and DLT source wiring           | `openhound` | `references/source-collection.md` |
+| Define base graph node/edge dataclasses and ID generation behavior                     | `openhound` | `references/graph-schema.md` |
+| Add DuckDB transforms or lookup methods                                                | `openhound` | `references/preproc-lookup.md` |
+| Wire phase registration (collect, preproc, convert), metadata, or package entry points | `openhound` | `references/register-extension.md` |
+| Validate a collector before finishing                                                  | `openhound` | `references/validate-extension.md` |
 
 ## General Rules
 
