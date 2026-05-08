@@ -45,6 +45,11 @@ class SourceContext:
 
 Add shared identifiers, tenant/org names, rate limit helpers, or authenticated clients to this dataclass when needed.
 
+
+## Rest API Client
+
+Important: Prefer using `dlt.sources.rest_api.RESTClient` for API collection.  This client has built-in support for pagination, retries, rate limit handling and logging. If the API has specific needs, extend `RESTClient` with a custom client class in a dedicated `client.py` module.
+
 ## Resources And Transformers
 
 Use `@app.resource(name=..., columns=<Model>)` for top-level collection. The `columns` model should reference the `BaseAsset` Pydantic class that validates yielded rows.
