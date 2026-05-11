@@ -1,16 +1,18 @@
-from openhound.core.asset import BaseAsset, EdgeDef
 from openhound.core.models.entries import Edge, EdgePath
 from openhound_{{ cookiecutter.target_service_slug }}.graph import {{ cookiecutter.target_service_slug }}NodeProperties, {{ cookiecutter.target_service_slug }}Node
 from openhound_{{ cookiecutter.target_service_slug }}.kinds import nodes as nk, edges as ek
 from openhound_{{ cookiecutter.target_service_slug }}.main import app
 from openhound.core.asset import BaseAsset, EdgeDef, NodeDef
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 @dataclass
 class AssetProperties({{ cookiecutter.target_service_slug }}NodeProperties):
-    hostname: str = field(
-        metadata={"description": "The hostname of an asset"}
-    )
+    """Example Asset
+
+    Attributes:
+        hostname: The hostname of the example asset
+    """
+    hostname: str
 
 
 # The resource decorator specifies that the model is an OpenGraph asset

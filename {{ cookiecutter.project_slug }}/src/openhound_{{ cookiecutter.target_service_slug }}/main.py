@@ -7,7 +7,8 @@ from dlt.extract.source import DltSource
 from .transforms import transforms
 
 # Initialise the base app, specifying the name of the service and optional help for the CLI.
-app = OpenHound("{{ cookiecutter.target_service_slug }}", help="OpenGraph collector for {{ cookiecutter.target_service_slug }}")
+# Make sure to replace the source_kind
+app = OpenHound("{{ cookiecutter.target_service_slug }}", source_kind="Kind", help="OpenGraph collector for {{ cookiecutter.target_service_slug }}")
 
 
 # Register the collection process. The returned value should contain your custom
