@@ -6,6 +6,7 @@ under `.agents/skills/`.
 
 ## Before Editing
 
+- Read `CONTRIBUTING.md` for development setup, commands, and this repository's conventions.
 - Read `.agents/standards/openhound.md` before making OpenHound collector changes.
 - Read `.agents/standards/workflow.md` before developing a new collector or making broad collector changes.
 - Load the `openhound` skill from `.agents/skills/openhound/` for task-specific workflows.

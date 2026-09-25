@@ -24,7 +24,7 @@ Derive a short uppercase prefix from the service slug, usually two to four chara
 
 | Service slug | Prefix | Example class | Example kind |
 |---|---|---|---|
-| `okta` | `OK` | `OKNode` | `OK_User` |
+| `okta` | `Okta` | `OktaNode` | `Okta_User` |
 | `github` | `GH` | `GHNodeProperties` | `GH_Repository` |
 | `kubernetes` | `K8S` | `K8SLookup` | `K8S_Pod` |
 
