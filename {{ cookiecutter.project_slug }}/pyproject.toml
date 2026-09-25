@@ -22,7 +22,6 @@ dev = [
     "pytest>=9.0.1",
     "ruff>=0.15.5",
     "mypy>=1.19.1",
-    "zensical>=0.0.27",
 ]
 
 [project.entry-points."openhound.sources"]

@@ -10,19 +10,53 @@ Development requires the following tools. Install them with your platform's pack
 - [Git](https://git-scm.com/) — version control
 - [DuckDB](https://duckdb.org/) — querying collected data
 - [Visual Studio Code](https://code.visualstudio.com/) — recommended editor
-- [Node.js](https://nodejs.org/) — only needed to install agent skills
+
+### Optional OG docs tooling
+
+The OG docs automation submodule uses PowerShell scripts. Install PowerShell
+5.1+ only if you generate or validate docs; custom icon rendering requires
+PowerShell 7+. On PowerShell 7+, run scripts with `pwsh`; on Windows PowerShell
+5.1, use `powershell`.
 
 ### Clone the repository with submodules
 
-`git clone --recurse-submodules <URL>`
+Clone the repository with its URL:
 
-If you already cloned without submodules, run `git submodule update --init`.
+```bash
+git clone --recurse-submodules <repository-url>
+```
+
+If you already cloned without submodules, run `git submodule update --init --recursive`.
+
+When setting up a newly generated project in Git, register the OG docs automation submodule before the first commit:
+
+```bash
+git submodule add https://github.com/SpecterOps/og-docs-automation.git docs/og-docs-automation
+```
 
 ### Install agent skills
 
-If you use a coding agent (Claude Code or Codex), install the shared agent skills
-(the documentation skills from `og-docs-automation` and the skills from the
-OpenHound template).
+The OpenHound collector skill is included in `.agents/skills/openhound/`.
+Documentation skills come from the `docs/og-docs-automation` submodule. After
+initializing that submodule, copy its Codex skill into your user skills folder.
+Codex documents `$HOME/.agents/skills` as the user-level skill location. Use
+either shell below; both copy the complete skill directory.
+
+**Bash or a compatible shell:**
+
+```bash
+mkdir -p "$HOME/.agents/skills"
+cp -R docs/og-docs-automation/skills/openhound-edge-docs "$HOME/.agents/skills/"
+```
+
+**PowerShell:**
+
+```powershell
+$skillSource = "docs/og-docs-automation/skills/openhound-edge-docs"
+$skillDestination = Join-Path $HOME ".agents/skills"
+New-Item -ItemType Directory -Force -Path $skillDestination | Out-Null
+Copy-Item -Recurse -Force -Path $skillSource -Destination $skillDestination
+```
 
 ### Install Python dependencies
 
