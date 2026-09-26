@@ -74,6 +74,13 @@ Enable the repository's pre-commit hooks so lint issues are caught before you pu
 uv run pre-commit install
 ```
 
+The hooks run Mypy over `src/` when source files or `pyproject.toml` change. To
+run the same type check directly:
+
+```bash
+uv run mypy
+```
+
 ## Browsing the lookup database
 
 Open the local `lookup.duckdb` database in the DuckDB UI:

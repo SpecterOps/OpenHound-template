@@ -16,3 +16,11 @@ repos:
       - id: ruff-check
         args: [ --fix ]
       - id: ruff-format
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy (src)
+        entry: uv run mypy
+        language: system
+        files: ^(src/|pyproject\.toml$)
+        pass_filenames: false

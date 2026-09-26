@@ -27,3 +27,19 @@ dev = [
 
 [project.entry-points."openhound.sources"]
 {{ cookiecutter.target_service_slug}} = "openhound_{{ cookiecutter.target_service_slug}}.main:app"
+
+[tool.mypy]
+python_version = "3.13"
+files = ["src"]
+disallow_untyped_defs = true
+disallow_any_generics = true
+no_implicit_optional = true
+warn_return_any = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = ["openhound.*"]
+follow_untyped_imports = true
