@@ -4,10 +4,10 @@ OpenHound is a resource collector built on DLT that converts upstream service re
 
 ## Core Architecture
 
-Every collector follows the same three-phase pipeline:
+Every collector follows the same pipeline, with optional preprocessing:
 
 ```text
-collect -> preproc -> convert
+collect -> [preproc] -> convert
 ```
 
 | Phase | Purpose |
@@ -16,7 +16,7 @@ collect -> preproc -> convert
 | `preproc` | Optionally load raw tables into DuckDB and build lookup/derived tables. |
 | `convert` | Read JSONL plus lookup data and emit OpenGraph nodes/edges. |
 
-All phases are registered in `src/<pkg>/main.py` using one `OpenHound("<source>", <root-kind>)` app instance and the `@app.collect()`, `@app.preproc()`, and `@app.convert()` decorators.
+Register the phases needed by the extension in `src/<pkg>/main.py` on one `OpenHound("<source>", source_kind="<SOURCE>")` app instance. `preproc` is optional. The constructor's `source_kind` is added to emitted nodes' kinds; it does not identify the collector's root node.
 
 ## Naming Conventions
 
@@ -24,7 +24,7 @@ Derive a short uppercase prefix from the service slug, usually two to four chara
 
 | Service slug | Prefix | Example class | Example kind |
 |---|---|---|---|
-| `okta` | `OK` | `OKNode` | `OK_User` |
+| [`sccm` (ConfigManBearPig)](https://github.com/SpecterOps/ConfigManBearPig) | `SCCM` | `SCCMAdminUserProperties` | `SCCM_AdminUser` |
 | `github` | `GH` | `GHNodeProperties` | `GH_Repository` |
 | `kubernetes` | `K8S` | `K8SLookup` | `K8S_Pod` |
 

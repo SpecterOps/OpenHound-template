@@ -17,13 +17,29 @@ build-backend = 'hatchling.build'
 
 [dependency-groups]
 dev = [
-    "openhound @ git+https://github.com/SpecterOps/openhound.git",
+    "openhound>=0.4.0",
     "pre-commit>=4.5.1",
     "pytest>=9.0.1",
     "ruff>=0.15.5",
     "mypy>=1.19.1",
-    "zensical>=0.0.27",
+    "griffe>=1.15.0",
 ]
 
 [project.entry-points."openhound.sources"]
 {{ cookiecutter.target_service_slug}} = "openhound_{{ cookiecutter.target_service_slug}}.main:app"
+
+[tool.mypy]
+python_version = "3.13"
+files = ["src"]
+disallow_untyped_defs = true
+disallow_any_generics = true
+no_implicit_optional = true
+warn_return_any = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = ["openhound.*"]
+follow_untyped_imports = true

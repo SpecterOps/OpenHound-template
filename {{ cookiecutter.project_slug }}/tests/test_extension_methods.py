@@ -2,7 +2,10 @@ from openhound.core.app import OpenHound
 from dlt.extract.validation import PydanticValidator
 from openhound_{{ cookiecutter.target_service_slug }}.main import app as ext_module
 try:
-    from openhound_{{ cookiecutter.target_service_slug }}.source import source as {{ cookiecutter.target_service_slug }}_source
+    # Importing registers decorated DLT resources and assets on the app.
+    from openhound_{{ cookiecutter.target_service_slug }}.source import (
+        source as {{ cookiecutter.target_service_slug }}_source,  # noqa: F401
+    )
 except Exception as err:
     pass
 

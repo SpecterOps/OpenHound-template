@@ -77,6 +77,7 @@ from openhound_<pkg>.main import app
 class Asset(BaseAsset):
     id: str
     name: str
+    hostname: str
     groups: list[str]
 
     @property
@@ -85,6 +86,7 @@ class Asset(BaseAsset):
             node_id=self.id,
             name=self.name,
             displayname=self.name,
+            hostname=self.hostname,
             environmentid=self._extras["environmentid"],
         )
         return EXNode(properties=properties, kinds=[nk.ASSET])

@@ -6,10 +6,21 @@ repos:
         exclude: mkdocs.yml
       - id: check-json
       - id: end-of-file-fixer
+        exclude: ^scripts/templates/
       - id: trailing-whitespace
+        exclude: ^scripts/templates/
       - id: check-added-large-files
-  - repo: https://github.com/psf/black
-    rev: 25.12.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.5
     hooks:
-      - id: black
-        exclude: ^cookiecutter-templates/
+      - id: ruff-check
+        args: [ --fix ]
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy (src)
+        entry: uv run mypy
+        language: system
+        files: ^(src/|pyproject\.toml$)
+        pass_filenames: false
