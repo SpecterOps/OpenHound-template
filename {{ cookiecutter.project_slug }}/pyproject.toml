@@ -17,7 +17,7 @@ build-backend = 'hatchling.build'
 
 [dependency-groups]
 dev = [
-    "openhound @ git+https://github.com/SpecterOps/openhound.git",
+    "openhound>=0.4.0",
     "pre-commit>=4.5.1",
     "pytest>=9.0.1",
     "ruff>=0.15.5",
