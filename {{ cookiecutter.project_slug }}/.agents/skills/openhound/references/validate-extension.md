@@ -30,6 +30,7 @@ Use an isolated uv virtual environment outside the repository so validation does
 export UV_PROJECT_ENVIRONMENT=/tmp/openhound-{{ cookiecutter.target_service_slug }}-venv
 uv run pytest
 uv run ruff check src/
+uv run ruff format --check src/
 uv run mypy src/
 ```
 
