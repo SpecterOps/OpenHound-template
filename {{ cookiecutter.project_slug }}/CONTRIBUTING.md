@@ -34,28 +34,13 @@ When setting up a newly generated project in Git, register the OG docs automatio
 git submodule add https://github.com/SpecterOps/og-docs-automation.git docs/og-docs-automation
 ```
 
-### Install agent skills
+### Install OpenHound agent skills
 
-The OpenHound collector skill is included in `.agents/skills/openhound/`.
-Documentation skills come from the `docs/og-docs-automation` submodule. After
-initializing that submodule, copy its Codex skill into your user skills folder.
-Codex documents `$HOME/.agents/skills` as the user-level skill location. Use
-either shell below; both copy the complete skill directory.
-
-**Bash or a compatible shell:**
+Use the
+[`skills` npm package](https://github.com/vercel-labs/skills) to install and manage skills for your coding agent.
 
 ```bash
-mkdir -p "$HOME/.agents/skills"
-cp -R docs/og-docs-automation/skills/openhound-edge-docs "$HOME/.agents/skills/"
-```
-
-**PowerShell:**
-
-```powershell
-$skillSource = "docs/og-docs-automation/skills/openhound-edge-docs"
-$skillDestination = Join-Path $HOME ".agents/skills"
-New-Item -ItemType Directory -Force -Path $skillDestination | Out-Null
-Copy-Item -Recurse -Force -Path $skillSource -Destination $skillDestination
+npx skills add SpecterOps/skills/plugins/bloodhound/skills/openhound-development
 ```
 
 ### Install Python dependencies
