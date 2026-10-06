@@ -40,7 +40,7 @@ Use the
 [`skills` npm package](https://github.com/vercel-labs/skills) to install and manage skills for your coding agent.
 
 ```bash
-npx skills add SpecterOps/og-docs-automation/skills
+npx skills add SpecterOps/skills/plugins/bloodhound/skills/openhound-development
 ```
 
 ### Install Python dependencies
