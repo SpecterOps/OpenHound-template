@@ -17,6 +17,24 @@ uv pip install -e .
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development tools and agent guidance.
 
+## Adapt this template to your service
+
+The Python paths below are relative to `src/openhound_{{ cookiecutter.target_service_slug }}/`.
+
+| Files | What to change |
+| --- | --- |
+| `auth.py` | Replace the example credentials and authentication adapters with authentication methods supported by your service. |
+| `client.py` | Set the API URL, response data selector, and pagination behavior. |
+| `resources/`, `source_context.py`, `source.py` | Replace example endpoints and resource categories; pass shared service context to child resources. |
+| `models/base.py`, `models/` | Match actual API fields and define the nodes, properties, and relationships to emit. |
+| `kinds/`, `graph.py` | Replace the `EX_` prefix and review graph properties and identifiers. |
+| `main.py`, `lookup.py`, `transforms.py`, `sql/` | Replace the organization-name enrichment example, or remove preprocessing if unnecessary. Keep phase registration aligned. |
+| Project-root `extension.yaml` | Update metadata, credential descriptions, parameters, and references. |
+| Project-root `tests/` | Replace JSON samples, FastAPI routes, and assertions with your service's API behavior. |
+| Project-root `README.md` | Replace example configuration, permissions, commands, and output descriptions with real usage instructions. |
+
+Changing `api_url` alone does **not** make this a working integration.
+
 ## Authentication
 
 Create `~/.dlt/secrets.toml` with **one** of these configurations. Never commit it.
