@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": "asset-a",
+      "name": "Application Server",
+      "hostname": "app.example.test",
+      "groups": ["group-a"]
+    },
+    {
+      "id": "asset-b",
+      "name": "Database Server",
+      "hostname": "db.example.test",
+      "groups": ["group-a", "group-b"]
+    },
+    {
+      "id": "asset-c",
+      "name": "Build Server",
+      "hostname": "build.example.test",
+      "groups": []
+    }
+  ]
+}

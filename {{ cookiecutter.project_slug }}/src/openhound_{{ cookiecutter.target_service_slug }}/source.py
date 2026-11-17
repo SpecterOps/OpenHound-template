@@ -1,66 +1,43 @@
-from dataclasses import dataclass
-from .main import app
+from typing import Literal
 
-from .models.asset import Asset
+import dlt
+from dlt.extract.resource import DltResource
 
-
-@dataclass
-class SourceContext:
-    # Example to add RESTclient to context
-    # client: RESTClient
-    tenant: str
-
-
-@app.resource(name="example_assets", parallelized=True, columns=Asset)
-def example_assets(ctx: SourceContext):
-    """DLT resource, fetches example assets.
-
-    Yields:
-        (Asset): The example asset.
-    """
-
-    # Example API call, returning individual assets
-    # response = ctx.client.get("/example").json()
-    # for asset in response["assets"]:
-    #     yield asset
-
-    # TODO: Replace with your actual collection logic
-    # yield 100 dummy assets as an example
-    for num in range(0, 100):
-        yield {
-            "id": num,
-            "name": f"my_asset_{num}",
-            "hostname": f"my_hostname_{num}",
-            "tenant": ctx.tenant,
-            "groups": ["1", "2", "3"],
-        }
+from openhound_{{ cookiecutter.target_service_slug }}.auth import BasicCredentials, TokenCredentials
+from openhound_{{ cookiecutter.target_service_slug }}.client import build_client
+from openhound_{{ cookiecutter.target_service_slug }}.main import app
+from openhound_{{ cookiecutter.target_service_slug }}.resources import directory, inventory
+from openhound_{{ cookiecutter.target_service_slug }}.resources.organization import organization
+from openhound_{{ cookiecutter.target_service_slug }}.source_context import SourceContext
 
 
 @app.source(name="{{ cookiecutter.target_service_slug }}", max_table_nesting=0)
-def source():
-    """DLT source, defines {{ cookiecutter.target_service_slug }} collection resources and transformers.
-    Add ctx.config/secret.value to method arguments to force specific config values, ex:
+def source(
+    credentials: TokenCredentials | BasicCredentials = dlt.secrets.value,
+    collection: Literal["all", "directory", "inventory"] = "all",
+) -> tuple[DltResource, ...]:
+    """Build clients once and select resource groups without dynamic registration."""
 
-    def source(token=dlt.secrets.value, host=dlt.secrets.value)
+    # Test which resource group to collect
+    if collection not in ("all", "directory", "inventory"):
+        raise ValueError(f"Unsupported collection mode: {collection}")
 
-    Args:
-        token (str): The {{ cookiecutter.target_service_slug }} password used for authentication.
-        host (str): The base {{ cookiecutter.target_service_slug }} URL used for API calls.
 
-    Returns:
-        (tuple[example_assets]): A tuple of DLT resources/transformers registered for the {{ cookiecutter.target_service_slug }} source.
+    # Set the source context with a REST client to be used by our resources
+    ctx = SourceContext(client=build_client(credentials))
 
-    """
+    # Define the root organization resource that is used for input for child resources
+    organization_resource = organization(ctx)
 
-    ctx = SourceContext(
-        # Example restclient
-        # client=RESTClient(
-        #     base_url=host,
-        #     headers={"accept": "application/json"},
-        #     auth=BearerTokenAuth(token=token),
-        #     paginator=SinglePagePaginator(),
-        # ),
-        tenant="tenantname",
+    # By default, always collect the organization resource and directory resources
+    resources = (
+        organization_resource,
+        *directory.all_resources(organization_resource, ctx),
     )
 
-    return (example_assets(ctx),)
+    # If collection type is all or inventory, also add our inventory resources
+    if collection in ("all", "inventory"):
+        resources += inventory.all_resources(organization_resource, ctx)
+
+    # Return all resources we want to collect
+    return resources

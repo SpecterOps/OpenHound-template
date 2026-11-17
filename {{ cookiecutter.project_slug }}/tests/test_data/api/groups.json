@@ -1,0 +1,6 @@
+{
+  "items": [
+    {"id": "group-a", "name": "Operators"},
+    {"id": "group-b", "name": "Administrators"}
+  ]
+}

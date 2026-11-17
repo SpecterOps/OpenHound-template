@@ -13,14 +13,24 @@ references:
     url: TBD
 
 credentials:
-  - name: example
-    description: Example credential
+  - name: api_url
+    description: API base URL, shared by both authentication modes.
+    required: false
+    default: https://api.example.com
+  - name: token
+    description: API bearer token. Supply this for token authentication instead of username and password.
+    required: false
+  - name: username
+    description: API username. Required with password for basic authentication.
+    required: false
+  - name: password
+    description: API password. Required with username for basic authentication.
     required: false
 
 parameters:
-  - name: size
-    description: An example parameter specifying batch size for fetching data
+  - name: collection
+    description: Resource group (all, directory, inventory). Inventory includes groups needed by membership edges.
     required: false
-    default: 10000
+    default: all
 
 tags: ["{{ cookiecutter.target_service_slug }}", "extension", "opengraph", "bloodhound"]

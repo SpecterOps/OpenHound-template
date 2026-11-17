@@ -37,7 +37,7 @@ Once installed, you can explore the available commands with `openhound --help`. 
 
 ### 1. Prerequisites
 
-- Python 3.12+
+- Python 3.13+
 - [uv](https://docs.astral.sh/uv/)
 
 ### 2. Install OpenHound
@@ -57,5 +57,14 @@ openhound create collector <path_where_to_create_collector>
 
 This will create a new collector based on this repository's cookiecutter template. The generated collector will include a sample collection and conversion pipeline, as well as a README to get you started.
 
+The scaffold demonstrates token/basic authentication with DLT credential classes,
+category-based resource directories, shared client/context modules, and a complete
+organization/group/asset example graph. It targets an example API: change its
+endpoints, authentication, schemas, and kind prefix to your service.
 
+## Template development
 
+```console
+uv sync --group dev
+uv run pytest
+```

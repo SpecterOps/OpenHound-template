@@ -1,28 +1,39 @@
-from openhound.core.models.entries import Edge, EdgePath
-from openhound_{{ cookiecutter.target_service_slug }}.graph import {{ cookiecutter.target_service_slug }}NodeProperties, {{ cookiecutter.target_service_slug }}Node
-from openhound_{{ cookiecutter.target_service_slug }}.kinds import nodes as nk, edges as ek
-from openhound_{{ cookiecutter.target_service_slug }}.main import app
-from openhound.core.asset import BaseAsset, EdgeDef, NodeDef
+from collections.abc import Iterator
 from dataclasses import dataclass
 
+from openhound.core.asset import EdgeDef, NodeDef
+from openhound.core.models.entries import Edge, EdgePath
+from pydantic import Field
+
+from openhound_{{ cookiecutter.target_service_slug }}.graph import (
+    CollectorNode,
+    CollectorNodeProperties,
+)
+from openhound_{{ cookiecutter.target_service_slug }}.kinds import edges as ek
+from openhound_{{ cookiecutter.target_service_slug }}.kinds import nodes as nk
+from openhound_{{ cookiecutter.target_service_slug }}.main import app
+from openhound_{{ cookiecutter.target_service_slug }}.models.base import CollectorAsset
+
+
 @dataclass
-class AssetProperties({{ cookiecutter.target_service_slug }}NodeProperties):
-    """Example Asset
+class AssetProperties(CollectorNodeProperties):
+    """Asset graph properties.
 
     Attributes:
-        hostname: The hostname of the example asset
+        hostname: DNS hostname of the asset.
+        organization_name: Collected organization name resolved through lookup.
     """
+
     hostname: str
+    organization_name: str | None = None
 
 
-# The resource decorator specifies that the model is an OpenGraph asset
-# with nodes and/or edges
 @app.asset(
     node=NodeDef(
         kind=nk.ASSET,
-        description="Example Asset",
+        description="Inventory asset",
         icon="cog",
-        properties=AssetProperties
+        properties=AssetProperties,
     ),
     edges=[
         EdgeDef(
@@ -31,28 +42,32 @@ class AssetProperties({{ cookiecutter.target_service_slug }}NodeProperties):
             kind=ek.MEMBER_OF,
             description="Asset belongs to group",
         )
-    ]
+    ],
 )
-class Asset(BaseAsset):
-    id: int
-    name: str
+class Asset(CollectorAsset):
+    organization_id: str = Field(min_length=1)
     hostname: str
-    groups: list[str]
+    groups: list[str] = Field(default_factory=list)
 
     @property
-    def as_node(self):
-        properties = AssetProperties(
-            name=self.name, displayname=self.name, hostname=self.hostname, example_of_required_id=str(self.id)
+    def as_node(self) -> CollectorNode:
+        return CollectorNode(
+            id=self.id,
+            kinds=[nk.ASSET],
+            properties=AssetProperties(
+                name=self.name,
+                displayname=self.name,
+                hostname=self.hostname,
+                environmentid=self.organization_id,
+                organization_name=self._lookup.organization_name(self.organization_id),
+            ),
         )
-        return {{ cookiecutter.target_service_slug }}Node(kinds=[nk.ASSET], properties=properties)
 
     @property
-    def _groups_memberships(self):
-        for group in self.groups:
-            start = EdgePath(value=self.as_node.id, match_by="id")
-            end = EdgePath(value=group, match_by="id")
-            yield Edge(kind=ek.MEMBER_OF, start=start, end=end)
-
-    @property
-    def edges(self):
-        yield from self._groups_memberships
+    def edges(self) -> Iterator[Edge]:
+        for group_id in self.groups:
+            yield Edge(
+                kind=ek.MEMBER_OF,
+                start=EdgePath(value=self.id, match_by="id"),
+                end=EdgePath(value=group_id, match_by="id"),
+            )
