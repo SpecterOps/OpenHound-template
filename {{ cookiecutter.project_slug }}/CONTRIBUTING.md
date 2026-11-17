@@ -66,9 +66,42 @@ run the same type check directly:
 uv run mypy
 ```
 
+## Collector development
+
+If you use a coding agent, use the `openhound` development skill for collector
+architecture and implementation guidance. Installation instructions are above.
+
+See the [README's architecture overview](README.md#architecture) for the project layout.
+
+### SQL transformations
+
+- Register SQL files in `SQL_TRANSFORMS_FILES` in `transforms.py`, in execution order.
+- Use `__SCHEMA__` for the collector schema.
+- Include required raw tables in the preprocessing map in `main.py`.
+
+## Validation
+
+Run these checks before submitting changes:
+
+```console
+uv run pytest
+uv run ruff check src tests
+uv run mypy
+```
+
+Mock API calls and use test-only credentials. Tests must not
+require live services or expose secrets.
+
+The HTTP integration fixtures in `tests/conftest.py` route DLT requests
+through FastAPI's `TestClient`, using sample responses in `tests/test_data/api/`.
+The test functions cover multiple auth modes, JSON pagination, shared parent pipes,
+and DLT model validation with the real collector client. No server process or
+network access is needed; requests to other hosts are rejected.
+Add routes and samples as the collector grows.
+
 ## Browsing the lookup database
 
-Open the local `lookup.duckdb` database in the DuckDB UI:
+After preprocessing, open the local `lookup.duckdb` database in the DuckDB UI:
 
 ```bash
 duckdb -ui lookup.duckdb
