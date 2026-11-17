@@ -7,7 +7,15 @@ output
 graph
 logs
 dbt_packages
+
+## Agents
+.cortex
+.agents
+.claude
+
+## IDE
 .vscode
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
