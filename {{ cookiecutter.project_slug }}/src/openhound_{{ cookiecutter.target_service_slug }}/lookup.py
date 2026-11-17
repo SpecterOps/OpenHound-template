@@ -4,24 +4,19 @@ from duckdb import DuckDBPyConnection
 from openhound.core.lookup import LookupManager
 
 
-class {{ cookiecutter.target_service_slug }}Lookup(LookupManager):
-    def __init__(self, client: DuckDBPyConnection, schema: str = "{{ cookiecutter.target_service_slug }}"):
+class CollectorLookup(LookupManager):
+    def __init__(
+        self,
+        client: DuckDBPyConnection,
+        schema: str = "{{ cookiecutter.target_service_slug }}",
+    ) -> None:
+        """Bind lookup queries to the preprocessed collector schema."""
         super().__init__(client, schema)
-        self.schema = schema
-        self.client = client
 
-    @lru_cache
-    def one_single_item(self) -> str | None:
-        """ An example to fetch 1 single item"""
-        res = self._find_single_object(
-            f"""SELECT node_id FROM {self.schema}.organizations"""
-        )
-        return res
-
-    @lru_cache
-    def all_items(self, my_filter: str):
-        """ An example to fetch multiple items with a query filter"""
-        return self.find_all_objects(
-            f"""SELECT node_id FROM {self.schema}.applications WHERE some_filter = ?""",
-            [my_filter],
+    @lru_cache  # noqa: B019 - Bounded lookup cache shared during conversion.
+    def organization_name(self, organization_id: str) -> str | None:
+        """Return the collected organization name, or None for an unknown ID."""
+        return self._find_single_object(
+            f"SELECT name FROM {self.schema}.organization_names WHERE id = ?",
+            [organization_id],
         )
