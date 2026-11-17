@@ -8,10 +8,8 @@ requires-python = ">=3.13"
 
 [dependency-groups]
 dev = [
-    "openhound",
     "pre-commit>=4.5.1",
     "pytest>=9.0.1",
     "ruff>=0.15.5",
     "mypy>=1.19.1",
-    "griffe>=1.15.0",
 ]
