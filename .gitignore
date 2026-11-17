@@ -1,14 +1,21 @@
 # Custom
 *.duckdb
 ui_catalog.db
-site/
-addons/
-collectors/
 notebooks
+site/
 output
 graph
 logs
+dbt_packages
+
+## Agents
+.cortex
+.agents
+.claude
+
+## IDE
 .vscode
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -82,7 +89,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-{{ cookiecutter.project_slug }}/docs/_build/
+docs/_build/
 
 # PyBuilder
 .pybuilder/
