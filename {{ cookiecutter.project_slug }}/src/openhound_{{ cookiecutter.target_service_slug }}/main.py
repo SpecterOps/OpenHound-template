@@ -36,4 +36,5 @@ def convert(ctx: ConvertContext) -> tuple[DltSource, dict[str, Any]]:
     """Convert collected rows and enrich assets with organization names."""
     from openhound_{{ cookiecutter.target_service_slug }}.source import source
 
-    return source()
+    # Returns the source and any additional extra context that can be added
+    return source(), {}
